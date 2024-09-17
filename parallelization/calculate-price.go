@@ -75,6 +75,7 @@ func fetchCalculationComponents(order *Order) {
 	go func() {
 		defer wg.Done()
 		promo = FetchPromoInformation()
+		order.Promo = &promo
 	}()
 
 	go func() {
@@ -83,8 +84,6 @@ func fetchCalculationComponents(order *Order) {
 	}()
 
 	wg.Wait()
-
-	order.Promo = &promo
 }
 
 func CalculateTotalPrice_Parallelized() float64 {
