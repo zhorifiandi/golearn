@@ -2,20 +2,24 @@ package parallelization_test
 
 import (
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/zhorifiandi/golearn/parallelization"
 )
 
-func TestRunAll(t *testing.T) {
-	numOfProcess := 20
-	processingTime := uint(1)
+func TestCalculateTotalPrice_Sequential(t *testing.T) {
+	start := time.Now()
+	totalPrice := parallelization.CalculateTotalPrice_Sequential()
+	elapsed := time.Since(start)
+	assert.Equal(t, float64(155), totalPrice)
+	t.Logf("Elapsed time: %s", elapsed)
+}
 
-	actualSequentialTime := parallelization.RunAllSequential(numOfProcess, processingTime)
-	actualParallelTime := parallelization.RunAllParallel(numOfProcess, processingTime)
-
-	t.Logf("Sequential Elapsed Time: %v\n", actualSequentialTime)
-	t.Logf("Parallel Elapsed Time: %v\n", actualParallelTime)
-
-	assert.Greater(t, actualSequentialTime, actualParallelTime)
+func TestCalculateTotalPrice_Parallelized(t *testing.T) {
+	start := time.Now()
+	totalPrice := parallelization.CalculateTotalPrice_Parallelized()
+	elapsed := time.Since(start)
+	assert.Equal(t, float64(155), totalPrice)
+	t.Logf("Elapsed time: %s", elapsed)
 }
