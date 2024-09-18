@@ -93,3 +93,40 @@ graph TD
     
 ```
 
+## Benchmark
+### Sequential Function 
+Elapsed time 5.279 seconds 🐢🐢🐢
+```sh
+go test -timeout 300s -run ^TestCalculateTotalPrice_Sequential$ github.com/zhorifiandi/golearn/parallelization -v
+
+=== RUN   TestCalculateTotalPrice_Sequential
+2024/09/17 15:56:49 Product A data fetched
+2024/09/17 15:56:50 Product B data fetched
+2024/09/17 15:56:51 Seller data fetched
+2024/09/17 15:56:52 Shipping fee fetched
+2024/09/17 15:56:53 Promo information fetched
+2024/09/17 15:56:53 Total Price: 155
+    /Users/arizho/CODEPERSONAL/golearn/parallelization/run-all_test.go:16: Elapsed time: 5.007204791s
+--- PASS: TestCalculateTotalPrice_Sequential (5.01s)
+PASS
+ok  	github.com/zhorifiandi/golearn/parallelization	5.279s
+```
+
+### Parallelized Function 
+Elapsed time 2 seconds. Much Fasteer!!! 🚀🚀🚀🚀🚀
+```sh
+go test -timeout 300s -run ^TestCalculateTotalPrice_Parallelized$ github.com/zhorifiandi/golearn/parallelization -v
+
+=== RUN   TestCalculateTotalPrice_Parallelized
+2024/09/17 15:56:17 Promo information fetched
+2024/09/17 15:56:17 Product A data fetched
+2024/09/17 15:56:17 Product B data fetched
+2024/09/17 15:56:17 Seller data fetched
+2024/09/17 15:56:18 Shipping fee fetched
+2024/09/17 15:56:18 Total Price: 155
+    /Users/arizho/CODEPERSONAL/golearn/parallelization/run-all_test.go:24: Elapsed time: 2.0042865s
+--- PASS: TestCalculateTotalPrice_Parallelized (2.00s)
+PASS
+ok  	github.com/zhorifiandi/golearn/parallelization	(cached)
+```
+
